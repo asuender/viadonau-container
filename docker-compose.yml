@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  influxdb:
+    image: influxdb:2.0
+    container_name: influxdb
+    ports:
+      - 8086:8086
+    env_file:
+      - .env
+    entrypoint: ['./entrypoint.sh']
+    volumes:
+      - $PWD/influxdb:/var/lib/influxdb
+
+  telegraf:
+    image: viadonau-telegraf:1.19
+    container_name: telegraf
+    depends_on:
+      - influxdb
+    env_file:
+      - .env
+    volumes:
+      - $PWD/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
+    command: ['./wait-for-it.sh', 'influxdb:8086', '--', 'telegraf', '--config', '/etc/telegraf/telegraf.conf']
