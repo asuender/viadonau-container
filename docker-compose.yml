@@ -3,7 +3,7 @@ version: '3.9'
 services:
   influxdb:
     image: influxdb:2.0
-    container_name: insy-influxdb
+    container_name: influxdb
     ports:
       - 8086:8086
     env_file:
@@ -14,7 +14,7 @@ services:
 
   telegraf:
     image: telegraf:1.19
-    container_name: insy-telegraf
+    container_name: telegraf
     depends_on:
       - influxdb
     env_file:
