@@ -11,7 +11,7 @@ services:
     entrypoint: ['./entrypoint.sh']
     volumes:
       - ./influxdb:/var/lib/influxdb
-    network:
+    networks:
       - proj_2223_viadonau_network
 
   telegraf:
@@ -23,7 +23,7 @@ services:
       - settings.env
     volumes:
       - ./telegraf:/etc/telegraf/telegraf.conf:rw
-    network:
+    networks:
       - proj_2223_viadonau_network
 
 networks:
