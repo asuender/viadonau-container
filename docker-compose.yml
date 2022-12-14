@@ -3,21 +3,29 @@ version: '3.9'
 services:
   influxdb:
     image: influxdb:2.0
-    container_name: influxdb
+    container_name: proj_2223_viadonau_influxdb
     ports:
-      - 8086:8086
+      - 18086:8086
     env_file:
-      - .env
+      - settings.env
     entrypoint: ['./entrypoint.sh']
     volumes:
-      - ${PWD}/influxdb:/var/lib/influxdb
+      - ./influxdb:/var/lib/influxdb
+    network:
+      - proj_2223_viadonau_network
 
   telegraf:
     image: telegraf:1.19
-    container_name: telegraf
+    container_name: proj_2223_viadonau_telegraf
     depends_on:
       - influxdb
     env_file:
-      - .env
+      - settings.env
     volumes:
-      - ${TELEGRAF_CFG_PATH}:/etc/telegraf/telegraf.conf:rw
+      - ./telegraf:/etc/telegraf/telegraf.conf:rw
+    network:
+      - proj_2223_viadonau_network
+
+networks:
+  proj_2223_viadonau_network:
+    driver: bridge
