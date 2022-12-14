@@ -22,7 +22,7 @@ services:
     env_file:
       - settings.env
     volumes:
-      - ./telegraf:/etc/telegraf/telegraf.conf:rw
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:rw
     networks:
       - proj_2223_viadonau_network
 
