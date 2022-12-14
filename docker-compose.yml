@@ -10,7 +10,7 @@ services:
       - settings.env
     entrypoint: ['./entrypoint.sh']
     volumes:
-      - ./influxdb:/var/lib/influxdb
+      - ./influxdb:/var/lib/influxdb2
     networks:
       - proj_2223_viadonau_network
 
