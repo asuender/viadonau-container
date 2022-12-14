@@ -4,6 +4,7 @@ services:
   influxdb:
     image: influxdb:2.0
     container_name: proj_2223_viadonau_influxdb
+    restart: always
     ports:
       - 18086:8086
     env_file:
@@ -17,6 +18,7 @@ services:
   telegraf:
     image: telegraf:1.19
     container_name: proj_2223_viadonau_telegraf
+    restart: always
     depends_on:
       - influxdb
     env_file:
